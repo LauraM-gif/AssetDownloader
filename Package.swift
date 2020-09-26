@@ -13,7 +13,7 @@ let package = Package(
     products: [
         .library(
             name: "AssetDownloader",
-//            type: .dynamic,
+            type: .dynamic,
             targets: ["AssetDownloader"]),
     ],
     targets: [
