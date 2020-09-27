@@ -8,7 +8,7 @@
 import Foundation
 import AVFoundation
 
-public struct RestoredTask<URLType: Hashable, Task: URLSessionTask>: Hashable {
+public struct RestoredTask<URLType: Hashable, Task: URLSessionTask>: Hashable, Equatable {
     public let name: String
     public let url: URLType
     public let sessionTask: Task
@@ -17,15 +17,8 @@ public struct RestoredTask<URLType: Hashable, Task: URLSessionTask>: Hashable {
         into hasher: inout Hasher
     ) {
         hasher.combine(name)
-    }
-}
-
-extension RestoredTask where URLType == AVURLAsset {
-
-    public func hash(
-        into hasher: inout Hasher
-    ) {
-        hasher.combine(name)
-        hasher.combine(url.url)
+        if let assetURL = url as? AVURLAsset {
+            hasher.combine(assetURL.url)
+        }
     }
 }
