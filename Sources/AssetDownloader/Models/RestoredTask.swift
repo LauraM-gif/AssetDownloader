@@ -17,6 +17,15 @@ public struct RestoredTask<URLType: Hashable, Task: URLSessionTask>: Hashable {
         into hasher: inout Hasher
     ) {
         hasher.combine(name)
-        hasher.combine(url)
+    }
+}
+
+extension RestoredTask where URLType == AVURLAsset {
+
+    public func hash(
+        into hasher: inout Hasher
+    ) {
+        hasher.combine(name)
+        hasher.combine(url.url)
     }
 }
