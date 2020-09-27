@@ -29,7 +29,16 @@ public struct DownloadTask<URLType: Hashable> {
         self.options = options
     }
 
-
+    public func eraseToAnyDownloadTask(
+    ) -> AnyDownloadTask {
+        AnyDownloadTask(
+            identifier: identifier,
+            url: url,
+            name: name,
+            artworkData: artworkData,
+            options: options
+        )
+    }
 }
 
 extension DownloadTask where URLType == AVURLAsset {
@@ -49,4 +58,14 @@ extension DownloadTask where URLType == AVURLAsset {
             options: options
         )
     }
+}
+
+
+public struct AnyDownloadTask {
+
+    public let identifier: String
+    public let url: AnyHashable
+    public let name: String
+    public let artworkData: Data?
+    public let options: [String : Any]?
 }
