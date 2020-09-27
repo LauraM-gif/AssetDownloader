@@ -17,8 +17,8 @@ public struct RestoredTask<URLType: Hashable, Task: URLSessionTask>: Hashable, E
         into hasher: inout Hasher
     ) {
         hasher.combine(name)
-        if let assetURL = url as? AVURLAsset {
-            hasher.combine(assetURL.url)
+        if let assetURL = (url as? AVURLAsset)?.url {
+            hasher.combine(assetURL)
         }
     }
 

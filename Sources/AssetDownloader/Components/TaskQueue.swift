@@ -31,8 +31,9 @@ extension TaskQueue {
 
     // The taskProvider will have to resume the tasks he receives
     public func restoreAssetDownloadTasks(
+        cancelNonRestorableTasks: Bool = true,
         _ taskProvider: @escaping (RestoredTask<AVURLAsset, AVAggregateAssetDownloadTask>) -> AVAssetDownloadDelegate?,
-        cancelNonRestorableTasks: Bool = true
+        _ taskSubscriptionCompletion: @escaping (SubscriptionReceipt) -> Void
     ) {
         session.getAllTasks { [proxySessionDelegate] tasks in
             let restoredTasks = tasks
@@ -48,7 +49,8 @@ extension TaskQueue {
                     continue
                 }
 
-                proxySessionDelegate.subscribe(delegate, identifier: task)
+                let receipt = proxySessionDelegate.subscribe(delegate, identifier: task)
+                taskSubscriptionCompletion(receipt)
             }
         }
     }
@@ -78,7 +80,7 @@ extension TaskQueue {
     public func makeAssetDownloadTask(
         _ downloadTask: DownloadTask<AVURLAsset>,
         delegate: AVAssetDownloadDelegate? = nil
-    ) -> (URLSessionTask, (() -> Void)?)? {
+    ) -> (URLSessionTask, SubscriptionReceipt?)? {
 
         let task = session.aggregateAssetDownloadTask(
             with: downloadTask.url,
@@ -94,12 +96,12 @@ extension TaskQueue {
             return nil
         }
 
-        var unsubscribeBlock: (() -> Void)?
+        var receipt: SubscriptionReceipt?
         if let delegate = delegate {
-            unsubscribeBlock = proxySessionDelegate.subscribe(delegate, identifier: _task)
+            receipt = proxySessionDelegate.subscribe(delegate, identifier: _task)
         }
 
-        return (_task, unsubscribeBlock)
+        return (_task, receipt)
     }
 }
 

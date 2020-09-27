@@ -41,14 +41,18 @@ extension ProxySessionDelegate {
     func subscribe(
         _ delegate: AVAssetDownloadDelegate,
         identifier: AnyHashable = UUID()
-    ) -> () -> Void {
+    ) -> SubscriptionReceipt {
         subscribers[identifier] = delegate
-        return { [weak self] in self?.subscribers[identifier] = nil }
+        return SubscriptionReceipt(
+            delegate: delegate,
+            unsubscribeBlock: { [weak self] in self?.subscribers[identifier] = nil }
+        )
     }
 }
 
 extension ProxySessionDelegate {
 
+    /// important: After this call the delegate will be removed from the subscribers list
     func urlSession(
         _ session: URLSession,
         task: URLSessionTask,
