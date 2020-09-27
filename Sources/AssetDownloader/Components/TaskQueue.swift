@@ -121,7 +121,7 @@ extension TaskQueue {
 
         return URLSession(
             configuration: configuration,
-            delegate: self,
+            delegate: proxySessionDelegate,
             delegateQueue: delegateQueue
         )
     }
