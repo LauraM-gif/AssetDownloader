@@ -34,12 +34,13 @@ extension TaskQueue {
         _ taskProvider: @escaping (RestoredTask<AVURLAsset, AVAggregateAssetDownloadTask>) -> AVAssetDownloadDelegate?,
         cancelNonRestorableTasks: Bool = true
     ) {
+        var setOfTasks = Set<RestoredTask<AVURLAsset, AVAggregateAssetDownloadTask>>()
         session.getAllTasks { [proxySessionDelegate] tasks in
-            let restoredDownloadTasks = tasks
+            tasks
                 .compactMap { ($0 as? AVAggregateAssetDownloadTask)?.taskDescription != nil ? $0 as? AVAggregateAssetDownloadTask : nil  }
                 .map { RestoredTask<AVURLAsset, AVAggregateAssetDownloadTask>(name: $0.taskDescription!, url: $0.urlAsset, sessionTask: $0) }
+                .forEach { if !setOfTasks.contains($0) { setOfTasks.insert($0) } }
 
-            let setOfTasks = Set<RestoredTask<AVURLAsset, AVAggregateAssetDownloadTask>>(restoredDownloadTasks)
             for task in setOfTasks {
                 guard let delegate = taskProvider(task) else {
                     if cancelNonRestorableTasks {
