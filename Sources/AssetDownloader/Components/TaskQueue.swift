@@ -33,7 +33,7 @@ extension TaskQueue {
     public func restoreAssetDownloadTasks(
         cancelNonRestorableTasks: Bool = true,
         _ taskProvider: @escaping (RestoredTask<AVURLAsset, AVAggregateAssetDownloadTask>) -> AVAssetDownloadDelegate?,
-        _ taskSubscriptionCompletion: @escaping (SubscriptionReceipt) -> Void
+        _ taskSubscriptionCompletion: @escaping (URLSessionDelegate, SubscriptionReceipt) -> Void
     ) {
         session.getAllTasks { [proxySessionDelegate] tasks in
             let restoredTasks = tasks
@@ -50,7 +50,7 @@ extension TaskQueue {
                 }
 
                 let receipt = proxySessionDelegate.subscribe(delegate, identifier: task)
-                taskSubscriptionCompletion(receipt)
+                taskSubscriptionCompletion(delegate, receipt)
             }
         }
     }
