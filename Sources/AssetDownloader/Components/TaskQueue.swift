@@ -27,6 +27,8 @@ public final class TaskQueue: NSObject {
         self.delegateQueue = delegateQueue
 
         super.init()
+
+        proxySessionDelegate.subscribe(self)
     }
 }
 
@@ -97,11 +99,9 @@ extension TaskQueue {
     private func makeAssetsSession(
     ) -> AVAssetDownloadURLSession {
         let configuration = URLSessionConfiguration.background(
-            withIdentifier: sessionName + ".assets"
+            withIdentifier: sessionName
         )
         configuration.sessionSendsLaunchEvents = true
-
-        proxySessionDelegate.subscribe(self)
 
         return AVAssetDownloadURLSession(
             configuration: configuration,
@@ -112,15 +112,8 @@ extension TaskQueue {
 
     private func makeURLSession(
     ) -> URLSession {
-        let configuration = URLSessionConfiguration.background(
-            withIdentifier: sessionName
-        )
-        configuration.sessionSendsLaunchEvents = true
-
-        proxySessionDelegate.subscribe(self)
-
         return URLSession(
-            configuration: configuration,
+            configuration: .default,
             delegate: proxySessionDelegate,
             delegateQueue: delegateQueue
         )
