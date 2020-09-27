@@ -10,11 +10,14 @@ import AVFoundation
 
 public final class TaskQueue: NSObject {
 
+    public typealias DownloadTaskFactoryResult = (task: URLSessionTask, subscriptionReceipt: SubscriptionReceipt?)
+
     private let sessionName: String
     private let delegateQueue: OperationQueue
 
     private lazy var proxySessionDelegate: ProxySessionDelegate = ProxySessionDelegate(self)
-    private lazy var session: AVAssetDownloadURLSession = makeSession()
+    private lazy var assetsSession: AVAssetDownloadURLSession = makeAssetsSession()
+    private lazy var urlSession: URLSession = makeURLSession()
 
     public init(
         _ sessionName: String,
@@ -29,18 +32,51 @@ public final class TaskQueue: NSObject {
 
 extension TaskQueue {
 
-    // The taskProvider will have to resume the tasks he receives
     public func restoreAssetDownloadTasks(
         cancelNonRestorableTasks: Bool = true,
         _ taskProvider: @escaping (RestoredTask<AVURLAsset, AVAggregateAssetDownloadTask>) -> AVAssetDownloadDelegate?,
         _ taskSubscriptionCompletion: @escaping (URLSessionDelegate, SubscriptionReceipt) -> Void
     ) {
+        _restoreTasks(
+            session: assetsSession,
+            cancelNonRestorableTasks: cancelNonRestorableTasks,
+            taskProvider,
+            taskSubscriptionCompletion
+        )
+    }
+
+    public func restoreDownloadTasks(
+        cancelNonRestorableTasks: Bool = true,
+        _ taskProvider: @escaping (RestoredTask<URLRequest, URLSessionDownloadTask>) -> URLSessionTaskDelegate?,
+        _ taskSubscriptionCompletion: @escaping (URLSessionDelegate, SubscriptionReceipt) -> Void
+    ) {
+        _restoreTasks(
+            session: urlSession,
+            cancelNonRestorableTasks: cancelNonRestorableTasks,
+            taskProvider,
+            taskSubscriptionCompletion
+        )
+    }
+}
+
+extension TaskQueue {
+
+    private func _restoreTasks<URLType: Hashable, Task, Delegate: URLSessionTaskDelegate>(
+        session: URLSession,
+        cancelNonRestorableTasks: Bool,
+        _ taskProvider: @escaping (RestoredTask<URLType, Task>) -> Delegate?,
+        _ taskSubscriptionCompletion: @escaping (URLSessionDelegate, SubscriptionReceipt) -> Void
+    ) {
         session.getAllTasks { [proxySessionDelegate] tasks in
             let restoredTasks = tasks
-                .compactMap { ($0 as? AVAggregateAssetDownloadTask)?.taskDescription != nil ? $0 as? AVAggregateAssetDownloadTask : nil  }
-                .map { RestoredTask<AVURLAsset, AVAggregateAssetDownloadTask>(name: $0.taskDescription!, url: $0.urlAsset, sessionTask: $0) }
+                .compactMap { ($0 as? Task)?.taskDescription != nil ? $0 as? Task : nil  }
+                .compactMap { RestoredTask<URLType, Task>(name: $0.taskDescription!, sessionTask: $0) }
 
-            let setOfTasks = Set<RestoredTask<AVURLAsset, AVAggregateAssetDownloadTask>>(restoredTasks)
+            let setOfTasks = Set<RestoredTask<URLType, Task>>(restoredTasks)
+            var counter = 0
+
+            debugPrint("\(String(describing: self)): Will try to restore \(setOfTasks.count) \(String(describing: Task.self)) tasks.")
+
             for task in setOfTasks {
                 guard let delegate = taskProvider(task) else {
                     if cancelNonRestorableTasks {
@@ -51,15 +87,31 @@ extension TaskQueue {
 
                 let receipt = proxySessionDelegate.subscribe(delegate, identifier: task)
                 taskSubscriptionCompletion(delegate, receipt)
+                counter += 1
             }
+
+            debugPrint("\(String(describing: self)): \(counter) \(String(describing: Task.self)) tasks restored.")
         }
     }
-}
 
-extension TaskQueue {
-
-    private func makeSession(
+    private func makeAssetsSession(
     ) -> AVAssetDownloadURLSession {
+        let configuration = URLSessionConfiguration.background(
+            withIdentifier: sessionName
+        )
+        configuration.sessionSendsLaunchEvents = true
+
+        proxySessionDelegate.subscribe(self)
+
+        return AVAssetDownloadURLSession(
+            configuration: configuration,
+            assetDownloadDelegate: proxySessionDelegate,
+            delegateQueue: delegateQueue
+        )
+    }
+
+    private func makeURLSession(
+    ) -> URLSession {
         let configuration = URLSessionConfiguration.background(
             withIdentifier: sessionName
         )
@@ -80,9 +132,8 @@ extension TaskQueue {
     public func makeAssetDownloadTask(
         _ downloadTask: DownloadTask<AVURLAsset>,
         delegate: AVAssetDownloadDelegate? = nil
-    ) -> (URLSessionTask, SubscriptionReceipt?)? {
-
-        let task = session.aggregateAssetDownloadTask(
+    ) -> DownloadTaskFactoryResult? {
+        let task = assetsSession.aggregateAssetDownloadTask(
             with: downloadTask.url,
             mediaSelections: [downloadTask.url.preferredMediaSelection],
             assetTitle: downloadTask.name,
@@ -92,7 +143,7 @@ extension TaskQueue {
         task?.taskDescription = downloadTask.name
 
         guard let _task = task else {
-            assertionFailure("Failed to make task for DownloadTask with identifier: \(downloadTask.identifier)")
+            assertionFailure("Failed to make assetTask for DownloadTask with identifier: \(downloadTask.identifier)")
             return nil
         }
 
@@ -102,6 +153,21 @@ extension TaskQueue {
         }
 
         return (_task, receipt)
+    }
+
+    public func makeDownloadTask(
+        _ downloadTask: DownloadTask<URLRequest>,
+        delegate: URLSessionTaskDelegate? = nil
+    ) -> DownloadTaskFactoryResult? {
+        let task = urlSession.downloadTask(with: downloadTask.url)
+        task.taskDescription = downloadTask.name
+
+        var receipt: SubscriptionReceipt?
+        if let delegate = delegate {
+            receipt = proxySessionDelegate.subscribe(delegate, identifier: task)
+        }
+
+        return (task, receipt)
     }
 }
 

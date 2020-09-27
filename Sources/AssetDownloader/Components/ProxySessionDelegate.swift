@@ -17,7 +17,7 @@ public protocol ProxySessionDelegating: class, AVAssetDownloadDelegate  {
 
 final class ProxySessionDelegate: NSObject {
 
-    private var subscribers: [AnyHashable: AVAssetDownloadDelegate] = [:]
+    private var subscribers: [AnyHashable: URLSessionTaskDelegate] = [:]
     private weak var delegate: ProxySessionDelegating?
 
     init(
@@ -31,15 +31,33 @@ final class ProxySessionDelegate: NSObject {
 
 extension ProxySessionDelegate {
 
-    private func delegate(
+    private func _delegate<Delegate: URLSessionTaskDelegate>(
         for task: URLSessionTask
+    ) -> Delegate? {
+        (subscribers[task] ?? delegate) as? Delegate
+    }
+
+    private func taskDelegate(
+        for task: URLSessionTask
+    ) -> URLSessionTaskDelegate? {
+        _delegate(for: task)
+    }
+
+    private func downloadTaskDelegate(
+        for task: URLSessionDownloadTask
+    ) -> URLSessionDownloadDelegate? {
+        _delegate(for: task)
+    }
+
+    private func assetDelegate(
+        for task: AVAggregateAssetDownloadTask
     ) -> AVAssetDownloadDelegate? {
-        subscribers[task] ?? delegate
+        _delegate(for: task)
     }
 
     @discardableResult
     func subscribe(
-        _ delegate: AVAssetDownloadDelegate,
+        _ delegate: URLSessionTaskDelegate,
         identifier: AnyHashable = UUID()
     ) -> SubscriptionReceipt {
         subscribers[identifier] = delegate
@@ -49,26 +67,33 @@ extension ProxySessionDelegate {
     }
 }
 
-extension ProxySessionDelegate {
+extension ProxySessionDelegate /* : URLSessionTaskDelegate */ {
 
-    /// important: After this call the delegate will be removed from the subscribers list
     func urlSession(
         _ session: URLSession,
-        task: URLSessionTask,
-        didCompleteWithError error: Error?
+        downloadTask: URLSessionDownloadTask,
+        didWriteData bytesWritten: Int64,
+        totalBytesWritten: Int64,
+        totalBytesExpectedToWrite: Int64
     ) {
-        delegate(for: task)?.urlSession?(
+        downloadTaskDelegate(for: downloadTask)?.urlSession?(
             session,
-            task: task,
-            didCompleteWithError: error
+            downloadTask: downloadTask,
+            didWriteData: bytesWritten,
+            totalBytesWritten: totalBytesWritten,
+            totalBytesExpectedToWrite: totalBytesExpectedToWrite
         )
     }
 
-    func urlSessionDidFinishEvents(
-        forBackgroundURLSession session: URLSession
+    func urlSession(
+        _ session: URLSession,
+        downloadTask: URLSessionDownloadTask,
+        didFinishDownloadingTo location: URL
     ) {
-        delegate?.urlSessionDidFinishEvents?(
-            forBackgroundURLSession: session
+        downloadTaskDelegate(for: downloadTask)?.urlSession(
+            session,
+            downloadTask: downloadTask,
+            didFinishDownloadingTo: location
         )
     }
 }
@@ -83,7 +108,7 @@ extension ProxySessionDelegate: AVAssetDownloadDelegate {
         timeRangeExpectedToLoad: CMTimeRange,
         for mediaSelection: AVMediaSelection
     ) {
-        delegate(for: aggregateAssetDownloadTask)?.urlSession?(
+        assetDelegate(for: aggregateAssetDownloadTask)?.urlSession?(
             session,
             aggregateAssetDownloadTask: aggregateAssetDownloadTask,
             didLoad: timeRange,
@@ -98,10 +123,34 @@ extension ProxySessionDelegate: AVAssetDownloadDelegate {
         aggregateAssetDownloadTask: AVAggregateAssetDownloadTask,
         willDownloadTo location: URL
     ) {
-        delegate(for: aggregateAssetDownloadTask)?.urlSession?(
+        assetDelegate(for: aggregateAssetDownloadTask)?.urlSession?(
             session,
             aggregateAssetDownloadTask: aggregateAssetDownloadTask,
             willDownloadTo: location
+        )
+    }
+}
+
+extension ProxySessionDelegate /* : URLSessionTaskDelegate */ {
+
+    /// important: After this call the delegate will be removed from the subscribers list
+    func urlSession(
+        _ session: URLSession,
+        task: URLSessionTask,
+        didCompleteWithError error: Error?
+    ) {
+        taskDelegate(for: task)?.urlSession?(
+            session,
+            task: task,
+            didCompleteWithError: error
+        )
+    }
+
+    func urlSessionDidFinishEvents(
+        forBackgroundURLSession session: URLSession
+    ) {
+        delegate?.urlSessionDidFinishEvents?(
+            forBackgroundURLSession: session
         )
     }
 }
