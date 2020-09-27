@@ -21,4 +21,12 @@ public struct RestoredTask<URLType: Hashable, Task: URLSessionTask>: Hashable, E
             hasher.combine(assetURL.url)
         }
     }
+
+    public static func ==(
+        lhs: Self,
+        rhs: Self
+    ) -> Bool {
+        return lhs.name == rhs.name
+            && (lhs.url as? AVURLAsset)?.url == (rhs.url as? AVURLAsset)?.url
+    }
 }
