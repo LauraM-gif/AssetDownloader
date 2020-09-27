@@ -67,7 +67,7 @@ extension ProxySessionDelegate {
     }
 }
 
-extension ProxySessionDelegate /* : URLSessionTaskDelegate */ {
+extension ProxySessionDelegate: URLSessionDownloadDelegate {
 
     func urlSession(
         _ session: URLSession,
