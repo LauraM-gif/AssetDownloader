@@ -1,519 +1,637 @@
 // !$*UTF8*$!
 {
-	archiveVersion = 1;
-	classes = {
-	};
-	objectVersion = 46;
-	objects = {
-
-/* Begin PBXAggregateTarget section */
-		"AssetDownloader::AssetDownloaderPackageTests::ProductTarget" /* AssetDownloaderPackageTests */ = {
-			isa = PBXAggregateTarget;
-			buildConfigurationList = OBJ_41 /* Build configuration list for PBXAggregateTarget "AssetDownloaderPackageTests" */;
-			buildPhases = (
-			);
-			dependencies = (
-				OBJ_44 /* PBXTargetDependency */,
-			);
-			name = AssetDownloaderPackageTests;
-			productName = AssetDownloaderPackageTests;
-		};
-/* End PBXAggregateTarget section */
-
-/* Begin PBXBuildFile section */
-		408D562F2520D8A200027919 /* SubscriptionReceipt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408D562E2520D8A200027919 /* SubscriptionReceipt.swift */; };
-		OBJ_29 /* ProxySessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* ProxySessionDelegate.swift */; };
-		OBJ_30 /* TaskQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* TaskQueue.swift */; };
-		OBJ_31 /* DownloadTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_13 /* DownloadTask.swift */; };
-		OBJ_32 /* RestoredTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_14 /* RestoredTask.swift */; };
-		OBJ_39 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_6 /* Package.swift */; };
-		OBJ_50 /* AssetDownloaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_17 /* AssetDownloaderTests.swift */; };
-		OBJ_51 /* XCTestManifests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_18 /* XCTestManifests.swift */; };
-		OBJ_53 /* AssetDownloader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "AssetDownloader::AssetDownloader::Product" /* AssetDownloader.framework */; };
-/* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		408D562D2520ADFD00027919 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = "AssetDownloader::AssetDownloader";
-			remoteInfo = AssetDownloader;
-		};
-/* End PBXContainerItemProxy section */
-
-/* Begin PBXFileReference section */
-		408D562E2520D8A200027919 /* SubscriptionReceipt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionReceipt.swift; sourceTree = "<group>"; };
-		"AssetDownloader::AssetDownloader::Product" /* AssetDownloader.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AssetDownloader.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		"AssetDownloader::AssetDownloaderTests::Product" /* AssetDownloaderTests.xctest */ = {isa = PBXFileReference; lastKnownFileType = file; path = AssetDownloaderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		OBJ_10 /* ProxySessionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProxySessionDelegate.swift; sourceTree = "<group>"; };
-		OBJ_11 /* TaskQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskQueue.swift; sourceTree = "<group>"; };
-		OBJ_13 /* DownloadTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadTask.swift; sourceTree = "<group>"; };
-		OBJ_14 /* RestoredTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestoredTask.swift; sourceTree = "<group>"; };
-		OBJ_17 /* AssetDownloaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetDownloaderTests.swift; sourceTree = "<group>"; };
-		OBJ_18 /* XCTestManifests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCTestManifests.swift; sourceTree = "<group>"; };
-		OBJ_22 /* __DerivedData */ = {isa = PBXFileReference; lastKnownFileType = folder; path = __DerivedData; sourceTree = SOURCE_ROOT; };
-		OBJ_23 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		OBJ_6 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
-/* End PBXFileReference section */
-
-/* Begin PBXFrameworksBuildPhase section */
-		OBJ_33 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 0;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		OBJ_52 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 0;
-			files = (
-				OBJ_53 /* AssetDownloader.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXFrameworksBuildPhase section */
-
-/* Begin PBXGroup section */
-		OBJ_12 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				OBJ_13 /* DownloadTask.swift */,
-				OBJ_14 /* RestoredTask.swift */,
-				408D562E2520D8A200027919 /* SubscriptionReceipt.swift */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		OBJ_15 /* Tests */ = {
-			isa = PBXGroup;
-			children = (
-				OBJ_16 /* AssetDownloaderTests */,
-			);
-			name = Tests;
-			sourceTree = SOURCE_ROOT;
-		};
-		OBJ_16 /* AssetDownloaderTests */ = {
-			isa = PBXGroup;
-			children = (
-				OBJ_17 /* AssetDownloaderTests.swift */,
-				OBJ_18 /* XCTestManifests.swift */,
-			);
-			name = AssetDownloaderTests;
-			path = Tests/AssetDownloaderTests;
-			sourceTree = SOURCE_ROOT;
-		};
-		OBJ_19 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				"AssetDownloader::AssetDownloaderTests::Product" /* AssetDownloaderTests.xctest */,
-				"AssetDownloader::AssetDownloader::Product" /* AssetDownloader.framework */,
-			);
-			name = Products;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		OBJ_5 /*  */ = {
-			isa = PBXGroup;
-			children = (
-				OBJ_6 /* Package.swift */,
-				OBJ_7 /* Sources */,
-				OBJ_15 /* Tests */,
-				OBJ_19 /* Products */,
-				OBJ_22 /* __DerivedData */,
-				OBJ_23 /* README.md */,
-			);
-			name = "";
-			sourceTree = "<group>";
-		};
-		OBJ_7 /* Sources */ = {
-			isa = PBXGroup;
-			children = (
-				OBJ_8 /* AssetDownloader */,
-			);
-			name = Sources;
-			sourceTree = SOURCE_ROOT;
-		};
-		OBJ_8 /* AssetDownloader */ = {
-			isa = PBXGroup;
-			children = (
-				OBJ_9 /* Components */,
-				OBJ_12 /* Models */,
-			);
-			name = AssetDownloader;
-			path = Sources/AssetDownloader;
-			sourceTree = SOURCE_ROOT;
-		};
-		OBJ_9 /* Components */ = {
-			isa = PBXGroup;
-			children = (
-				OBJ_10 /* ProxySessionDelegate.swift */,
-				OBJ_11 /* TaskQueue.swift */,
-			);
-			path = Components;
-			sourceTree = "<group>";
-		};
-/* End PBXGroup section */
-
-/* Begin PBXNativeTarget section */
-		"AssetDownloader::AssetDownloader" /* AssetDownloader */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = OBJ_25 /* Build configuration list for PBXNativeTarget "AssetDownloader" */;
-			buildPhases = (
-				OBJ_28 /* Sources */,
-				OBJ_33 /* Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = AssetDownloader;
-			productName = AssetDownloader;
-			productReference = "AssetDownloader::AssetDownloader::Product" /* AssetDownloader.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		"AssetDownloader::AssetDownloaderTests" /* AssetDownloaderTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = OBJ_46 /* Build configuration list for PBXNativeTarget "AssetDownloaderTests" */;
-			buildPhases = (
-				OBJ_49 /* Sources */,
-				OBJ_52 /* Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				OBJ_54 /* PBXTargetDependency */,
-			);
-			name = AssetDownloaderTests;
-			productName = AssetDownloaderTests;
-			productReference = "AssetDownloader::AssetDownloaderTests::Product" /* AssetDownloaderTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		"AssetDownloader::SwiftPMPackageDescription" /* AssetDownloaderPackageDescription */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = OBJ_35 /* Build configuration list for PBXNativeTarget "AssetDownloaderPackageDescription" */;
-			buildPhases = (
-				OBJ_38 /* Sources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = AssetDownloaderPackageDescription;
-			productName = AssetDownloaderPackageDescription;
-			productType = "com.apple.product-type.framework";
-		};
-/* End PBXNativeTarget section */
-
-/* Begin PBXProject section */
-		OBJ_1 /* Project object */ = {
-			isa = PBXProject;
-			attributes = {
-				LastSwiftMigration = 9999;
-				LastUpgradeCheck = 9999;
-			};
-			buildConfigurationList = OBJ_2 /* Build configuration list for PBXProject "AssetDownloader" */;
-			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = en;
-			hasScannedForEncodings = 0;
-			knownRegions = (
-				en,
-			);
-			mainGroup = OBJ_5 /*  */;
-			productRefGroup = OBJ_19 /* Products */;
-			projectDirPath = "";
-			projectRoot = "";
-			targets = (
-				"AssetDownloader::AssetDownloader" /* AssetDownloader */,
-				"AssetDownloader::SwiftPMPackageDescription" /* AssetDownloaderPackageDescription */,
-				"AssetDownloader::AssetDownloaderPackageTests::ProductTarget" /* AssetDownloaderPackageTests */,
-				"AssetDownloader::AssetDownloaderTests" /* AssetDownloaderTests */,
-			);
-		};
-/* End PBXProject section */
-
-/* Begin PBXSourcesBuildPhase section */
-		OBJ_28 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 0;
-			files = (
-				OBJ_29 /* ProxySessionDelegate.swift in Sources */,
-				OBJ_30 /* TaskQueue.swift in Sources */,
-				408D562F2520D8A200027919 /* SubscriptionReceipt.swift in Sources */,
-				OBJ_31 /* DownloadTask.swift in Sources */,
-				OBJ_32 /* RestoredTask.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		OBJ_38 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 0;
-			files = (
-				OBJ_39 /* Package.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		OBJ_49 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 0;
-			files = (
-				OBJ_50 /* AssetDownloaderTests.swift in Sources */,
-				OBJ_51 /* XCTestManifests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		OBJ_44 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = "AssetDownloader::AssetDownloaderTests" /* AssetDownloaderTests */;
-			targetProxy = "AssetDownloader::AssetDownloaderTests" /* AssetDownloaderTests */;
-		};
-		OBJ_54 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = "AssetDownloader::AssetDownloader" /* AssetDownloader */;
-			targetProxy = 408D562D2520ADFD00027919 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
-/* Begin XCBuildConfiguration section */
-		OBJ_26 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ENABLE_TESTABILITY = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
-				);
-				HEADER_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = AssetDownloader.xcodeproj/AssetDownloader_Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
-				OTHER_CFLAGS = "$(inherited)";
-				OTHER_LDFLAGS = "$(inherited)";
-				OTHER_SWIFT_FLAGS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = AssetDownloader;
-				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
-				SWIFT_VERSION = 5.0;
-				TARGET_NAME = AssetDownloader;
-				TVOS_DEPLOYMENT_TARGET = 9.0;
-				WATCHOS_DEPLOYMENT_TARGET = 2.0;
-			};
-			name = Debug;
-		};
-		OBJ_27 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ENABLE_TESTABILITY = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
-				);
-				HEADER_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = AssetDownloader.xcodeproj/AssetDownloader_Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
-				OTHER_CFLAGS = "$(inherited)";
-				OTHER_LDFLAGS = "$(inherited)";
-				OTHER_SWIFT_FLAGS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = AssetDownloader;
-				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
-				SWIFT_VERSION = 5.0;
-				TARGET_NAME = AssetDownloader;
-				TVOS_DEPLOYMENT_TARGET = 9.0;
-				WATCHOS_DEPLOYMENT_TARGET = 2.0;
-			};
-			name = Release;
-		};
-		OBJ_3 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_ARC = YES;
-				COMBINE_HIDPI_IMAGES = YES;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_NS_ASSERTIONS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"$(inherited)",
-					"SWIFT_PACKAGE=1",
-					"DEBUG=1",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
-				ONLY_ACTIVE_ARCH = YES;
-				OTHER_SWIFT_FLAGS = "$(inherited) -DXcode";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
-				SUPPORTED_PLATFORMS = "macosx iphoneos iphonesimulator appletvos appletvsimulator watchos watchsimulator";
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) SWIFT_PACKAGE DEBUG";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				USE_HEADERMAP = NO;
-			};
-			name = Debug;
-		};
-		OBJ_36 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				LD = /usr/bin/true;
-				OTHER_SWIFT_FLAGS = "-swift-version 5 -I $(TOOLCHAIN_DIR)/usr/lib/swift/pm/4_2 -sdk /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk -package-description-version 5.3.0";
-				SWIFT_VERSION = 5.0;
-			};
-			name = Debug;
-		};
-		OBJ_37 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				LD = /usr/bin/true;
-				OTHER_SWIFT_FLAGS = "-swift-version 5 -I $(TOOLCHAIN_DIR)/usr/lib/swift/pm/4_2 -sdk /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk -package-description-version 5.3.0";
-				SWIFT_VERSION = 5.0;
-			};
-			name = Release;
-		};
-		OBJ_4 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_ARC = YES;
-				COMBINE_HIDPI_IMAGES = YES;
-				COPY_PHASE_STRIP = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_OPTIMIZATION_LEVEL = s;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"$(inherited)",
-					"SWIFT_PACKAGE=1",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
-				OTHER_SWIFT_FLAGS = "$(inherited) -DXcode";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
-				SUPPORTED_PLATFORMS = "macosx iphoneos iphonesimulator appletvos appletvsimulator watchos watchsimulator";
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) SWIFT_PACKAGE";
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				USE_HEADERMAP = NO;
-			};
-			name = Release;
-		};
-		OBJ_42 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-			};
-			name = Debug;
-		};
-		OBJ_43 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-			};
-			name = Release;
-		};
-		OBJ_47 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
-				);
-				HEADER_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = AssetDownloader.xcodeproj/AssetDownloaderTests_Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/../Frameworks @loader_path/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
-				OTHER_CFLAGS = "$(inherited)";
-				OTHER_LDFLAGS = "$(inherited)";
-				OTHER_SWIFT_FLAGS = "$(inherited)";
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
-				SWIFT_VERSION = 5.0;
-				TARGET_NAME = AssetDownloaderTests;
-				TVOS_DEPLOYMENT_TARGET = 9.0;
-				WATCHOS_DEPLOYMENT_TARGET = 2.0;
-			};
-			name = Debug;
-		};
-		OBJ_48 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
-				);
-				HEADER_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = AssetDownloader.xcodeproj/AssetDownloaderTests_Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/../Frameworks @loader_path/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
-				OTHER_CFLAGS = "$(inherited)";
-				OTHER_LDFLAGS = "$(inherited)";
-				OTHER_SWIFT_FLAGS = "$(inherited)";
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
-				SWIFT_VERSION = 5.0;
-				TARGET_NAME = AssetDownloaderTests;
-				TVOS_DEPLOYMENT_TARGET = 9.0;
-				WATCHOS_DEPLOYMENT_TARGET = 2.0;
-			};
-			name = Release;
-		};
-/* End XCBuildConfiguration section */
-
-/* Begin XCConfigurationList section */
-		OBJ_2 /* Build configuration list for PBXProject "AssetDownloader" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				OBJ_3 /* Debug */,
-				OBJ_4 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		OBJ_25 /* Build configuration list for PBXNativeTarget "AssetDownloader" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				OBJ_26 /* Debug */,
-				OBJ_27 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		OBJ_35 /* Build configuration list for PBXNativeTarget "AssetDownloaderPackageDescription" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				OBJ_36 /* Debug */,
-				OBJ_37 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		OBJ_41 /* Build configuration list for PBXAggregateTarget "AssetDownloaderPackageTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				OBJ_42 /* Debug */,
-				OBJ_43 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		OBJ_46 /* Build configuration list for PBXNativeTarget "AssetDownloaderTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				OBJ_47 /* Debug */,
-				OBJ_48 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-/* End XCConfigurationList section */
-	};
-	rootObject = OBJ_1 /* Project object */;
+   archiveVersion = "1";
+   objectVersion = "46";
+   objects = {
+      "AssetDownloader::AssetDownloader" = {
+         isa = "PBXNativeTarget";
+         buildConfigurationList = "OBJ_26";
+         buildPhases = (
+            "OBJ_29",
+            "OBJ_35"
+         );
+         dependencies = (
+         );
+         name = "AssetDownloader";
+         productName = "AssetDownloader";
+         productReference = "AssetDownloader::AssetDownloader::Product";
+         productType = "com.apple.product-type.framework";
+      };
+      "AssetDownloader::AssetDownloader::Product" = {
+         isa = "PBXFileReference";
+         path = "AssetDownloader.framework";
+         sourceTree = "BUILT_PRODUCTS_DIR";
+      };
+      "AssetDownloader::AssetDownloaderPackageTests::ProductTarget" = {
+         isa = "PBXAggregateTarget";
+         buildConfigurationList = "OBJ_43";
+         buildPhases = (
+         );
+         dependencies = (
+            "OBJ_46"
+         );
+         name = "AssetDownloaderPackageTests";
+         productName = "AssetDownloaderPackageTests";
+      };
+      "AssetDownloader::AssetDownloaderTests" = {
+         isa = "PBXNativeTarget";
+         buildConfigurationList = "OBJ_48";
+         buildPhases = (
+            "OBJ_51",
+            "OBJ_54"
+         );
+         dependencies = (
+            "OBJ_56"
+         );
+         name = "AssetDownloaderTests";
+         productName = "AssetDownloaderTests";
+         productReference = "AssetDownloader::AssetDownloaderTests::Product";
+         productType = "com.apple.product-type.bundle.unit-test";
+      };
+      "AssetDownloader::AssetDownloaderTests::Product" = {
+         isa = "PBXFileReference";
+         path = "AssetDownloaderTests.xctest";
+         sourceTree = "BUILT_PRODUCTS_DIR";
+      };
+      "AssetDownloader::SwiftPMPackageDescription" = {
+         isa = "PBXNativeTarget";
+         buildConfigurationList = "OBJ_37";
+         buildPhases = (
+            "OBJ_40"
+         );
+         dependencies = (
+         );
+         name = "AssetDownloaderPackageDescription";
+         productName = "AssetDownloaderPackageDescription";
+         productType = "com.apple.product-type.framework";
+      };
+      "OBJ_1" = {
+         isa = "PBXProject";
+         attributes = {
+            LastSwiftMigration = "9999";
+            LastUpgradeCheck = "9999";
+         };
+         buildConfigurationList = "OBJ_2";
+         compatibilityVersion = "Xcode 3.2";
+         developmentRegion = "en";
+         hasScannedForEncodings = "0";
+         knownRegions = (
+            "en"
+         );
+         mainGroup = "OBJ_5";
+         productRefGroup = "OBJ_20";
+         projectDirPath = ".";
+         targets = (
+            "AssetDownloader::AssetDownloader",
+            "AssetDownloader::SwiftPMPackageDescription",
+            "AssetDownloader::AssetDownloaderPackageTests::ProductTarget",
+            "AssetDownloader::AssetDownloaderTests"
+         );
+      };
+      "OBJ_10" = {
+         isa = "PBXFileReference";
+         path = "ProxySessionDelegate.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_11" = {
+         isa = "PBXFileReference";
+         path = "TaskQueue.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_12" = {
+         isa = "PBXGroup";
+         children = (
+            "OBJ_13",
+            "OBJ_14",
+            "OBJ_15"
+         );
+         name = "Models";
+         path = "Models";
+         sourceTree = "<group>";
+      };
+      "OBJ_13" = {
+         isa = "PBXFileReference";
+         path = "DownloadTask.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_14" = {
+         isa = "PBXFileReference";
+         path = "RestoredTask.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_15" = {
+         isa = "PBXFileReference";
+         path = "SubscriptionReceipt.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_16" = {
+         isa = "PBXGroup";
+         children = (
+            "OBJ_17"
+         );
+         name = "Tests";
+         path = "";
+         sourceTree = "SOURCE_ROOT";
+      };
+      "OBJ_17" = {
+         isa = "PBXGroup";
+         children = (
+            "OBJ_18",
+            "OBJ_19"
+         );
+         name = "AssetDownloaderTests";
+         path = "Tests/AssetDownloaderTests";
+         sourceTree = "SOURCE_ROOT";
+      };
+      "OBJ_18" = {
+         isa = "PBXFileReference";
+         path = "AssetDownloaderTests.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_19" = {
+         isa = "PBXFileReference";
+         path = "XCTestManifests.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_2" = {
+         isa = "XCConfigurationList";
+         buildConfigurations = (
+            "OBJ_3",
+            "OBJ_4"
+         );
+         defaultConfigurationIsVisible = "0";
+         defaultConfigurationName = "Release";
+      };
+      "OBJ_20" = {
+         isa = "PBXGroup";
+         children = (
+            "AssetDownloader::AssetDownloaderTests::Product",
+            "AssetDownloader::AssetDownloader::Product"
+         );
+         name = "Products";
+         path = "";
+         sourceTree = "BUILT_PRODUCTS_DIR";
+      };
+      "OBJ_23" = {
+         isa = "PBXFileReference";
+         path = "__DerivedData";
+         sourceTree = "SOURCE_ROOT";
+      };
+      "OBJ_24" = {
+         isa = "PBXFileReference";
+         path = "README.md";
+         sourceTree = "<group>";
+      };
+      "OBJ_26" = {
+         isa = "XCConfigurationList";
+         buildConfigurations = (
+            "OBJ_27",
+            "OBJ_28"
+         );
+         defaultConfigurationIsVisible = "0";
+         defaultConfigurationName = "Release";
+      };
+      "OBJ_27" = {
+         isa = "XCBuildConfiguration";
+         buildSettings = {
+            ENABLE_TESTABILITY = "YES";
+            FRAMEWORK_SEARCH_PATHS = (
+               "$(inherited)",
+               "$(PLATFORM_DIR)/Developer/Library/Frameworks"
+            );
+            HEADER_SEARCH_PATHS = (
+               "$(inherited)"
+            );
+            INFOPLIST_FILE = "AssetDownloader.xcodeproj/AssetDownloader_Info.plist";
+            IPHONEOS_DEPLOYMENT_TARGET = "13.0";
+            LD_RUNPATH_SEARCH_PATHS = (
+               "$(inherited)",
+               "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx"
+            );
+            MACOSX_DEPLOYMENT_TARGET = "10.15";
+            OTHER_CFLAGS = (
+               "$(inherited)"
+            );
+            OTHER_LDFLAGS = (
+               "$(inherited)"
+            );
+            OTHER_SWIFT_FLAGS = (
+               "$(inherited)"
+            );
+            PRODUCT_BUNDLE_IDENTIFIER = "AssetDownloader";
+            PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+            PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+            SKIP_INSTALL = "YES";
+            SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
+               "$(inherited)"
+            );
+            SWIFT_VERSION = "5.0";
+            TARGET_NAME = "AssetDownloader";
+            TVOS_DEPLOYMENT_TARGET = "13.0";
+            WATCHOS_DEPLOYMENT_TARGET = "2.0";
+         };
+         name = "Debug";
+      };
+      "OBJ_28" = {
+         isa = "XCBuildConfiguration";
+         buildSettings = {
+            ENABLE_TESTABILITY = "YES";
+            FRAMEWORK_SEARCH_PATHS = (
+               "$(inherited)",
+               "$(PLATFORM_DIR)/Developer/Library/Frameworks"
+            );
+            HEADER_SEARCH_PATHS = (
+               "$(inherited)"
+            );
+            INFOPLIST_FILE = "AssetDownloader.xcodeproj/AssetDownloader_Info.plist";
+            IPHONEOS_DEPLOYMENT_TARGET = "13.0";
+            LD_RUNPATH_SEARCH_PATHS = (
+               "$(inherited)",
+               "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx"
+            );
+            MACOSX_DEPLOYMENT_TARGET = "10.15";
+            OTHER_CFLAGS = (
+               "$(inherited)"
+            );
+            OTHER_LDFLAGS = (
+               "$(inherited)"
+            );
+            OTHER_SWIFT_FLAGS = (
+               "$(inherited)"
+            );
+            PRODUCT_BUNDLE_IDENTIFIER = "AssetDownloader";
+            PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+            PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+            SKIP_INSTALL = "YES";
+            SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
+               "$(inherited)"
+            );
+            SWIFT_VERSION = "5.0";
+            TARGET_NAME = "AssetDownloader";
+            TVOS_DEPLOYMENT_TARGET = "13.0";
+            WATCHOS_DEPLOYMENT_TARGET = "2.0";
+         };
+         name = "Release";
+      };
+      "OBJ_29" = {
+         isa = "PBXSourcesBuildPhase";
+         files = (
+            "OBJ_30",
+            "OBJ_31",
+            "OBJ_32",
+            "OBJ_33",
+            "OBJ_34"
+         );
+      };
+      "OBJ_3" = {
+         isa = "XCBuildConfiguration";
+         buildSettings = {
+            CLANG_ENABLE_OBJC_ARC = "YES";
+            COMBINE_HIDPI_IMAGES = "YES";
+            COPY_PHASE_STRIP = "NO";
+            DEBUG_INFORMATION_FORMAT = "dwarf";
+            DYLIB_INSTALL_NAME_BASE = "@rpath";
+            ENABLE_NS_ASSERTIONS = "YES";
+            GCC_OPTIMIZATION_LEVEL = "0";
+            GCC_PREPROCESSOR_DEFINITIONS = (
+               "$(inherited)",
+               "SWIFT_PACKAGE=1",
+               "DEBUG=1"
+            );
+            MACOSX_DEPLOYMENT_TARGET = "10.10";
+            ONLY_ACTIVE_ARCH = "YES";
+            OTHER_SWIFT_FLAGS = (
+               "$(inherited)",
+               "-DXcode"
+            );
+            PRODUCT_NAME = "$(TARGET_NAME)";
+            SDKROOT = "macosx";
+            SUPPORTED_PLATFORMS = (
+               "macosx",
+               "iphoneos",
+               "iphonesimulator",
+               "appletvos",
+               "appletvsimulator",
+               "watchos",
+               "watchsimulator"
+            );
+            SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
+               "$(inherited)",
+               "SWIFT_PACKAGE",
+               "DEBUG"
+            );
+            SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+            USE_HEADERMAP = "NO";
+         };
+         name = "Debug";
+      };
+      "OBJ_30" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_10";
+      };
+      "OBJ_31" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_11";
+      };
+      "OBJ_32" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_13";
+      };
+      "OBJ_33" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_14";
+      };
+      "OBJ_34" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_15";
+      };
+      "OBJ_35" = {
+         isa = "PBXFrameworksBuildPhase";
+         files = (
+         );
+      };
+      "OBJ_37" = {
+         isa = "XCConfigurationList";
+         buildConfigurations = (
+            "OBJ_38",
+            "OBJ_39"
+         );
+         defaultConfigurationIsVisible = "0";
+         defaultConfigurationName = "Release";
+      };
+      "OBJ_38" = {
+         isa = "XCBuildConfiguration";
+         buildSettings = {
+            LD = "/usr/bin/true";
+            OTHER_SWIFT_FLAGS = (
+               "-swift-version",
+               "5",
+               "-I",
+               "$(TOOLCHAIN_DIR)/usr/lib/swift/pm/4_2",
+               "-sdk",
+               "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk",
+               "-package-description-version",
+               "5.3.0"
+            );
+            SWIFT_VERSION = "5.0";
+         };
+         name = "Debug";
+      };
+      "OBJ_39" = {
+         isa = "XCBuildConfiguration";
+         buildSettings = {
+            LD = "/usr/bin/true";
+            OTHER_SWIFT_FLAGS = (
+               "-swift-version",
+               "5",
+               "-I",
+               "$(TOOLCHAIN_DIR)/usr/lib/swift/pm/4_2",
+               "-sdk",
+               "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk",
+               "-package-description-version",
+               "5.3.0"
+            );
+            SWIFT_VERSION = "5.0";
+         };
+         name = "Release";
+      };
+      "OBJ_4" = {
+         isa = "XCBuildConfiguration";
+         buildSettings = {
+            CLANG_ENABLE_OBJC_ARC = "YES";
+            COMBINE_HIDPI_IMAGES = "YES";
+            COPY_PHASE_STRIP = "YES";
+            DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+            DYLIB_INSTALL_NAME_BASE = "@rpath";
+            GCC_OPTIMIZATION_LEVEL = "s";
+            GCC_PREPROCESSOR_DEFINITIONS = (
+               "$(inherited)",
+               "SWIFT_PACKAGE=1"
+            );
+            MACOSX_DEPLOYMENT_TARGET = "10.10";
+            OTHER_SWIFT_FLAGS = (
+               "$(inherited)",
+               "-DXcode"
+            );
+            PRODUCT_NAME = "$(TARGET_NAME)";
+            SDKROOT = "macosx";
+            SUPPORTED_PLATFORMS = (
+               "macosx",
+               "iphoneos",
+               "iphonesimulator",
+               "appletvos",
+               "appletvsimulator",
+               "watchos",
+               "watchsimulator"
+            );
+            SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
+               "$(inherited)",
+               "SWIFT_PACKAGE"
+            );
+            SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+            USE_HEADERMAP = "NO";
+         };
+         name = "Release";
+      };
+      "OBJ_40" = {
+         isa = "PBXSourcesBuildPhase";
+         files = (
+            "OBJ_41"
+         );
+      };
+      "OBJ_41" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_6";
+      };
+      "OBJ_43" = {
+         isa = "XCConfigurationList";
+         buildConfigurations = (
+            "OBJ_44",
+            "OBJ_45"
+         );
+         defaultConfigurationIsVisible = "0";
+         defaultConfigurationName = "Release";
+      };
+      "OBJ_44" = {
+         isa = "XCBuildConfiguration";
+         buildSettings = {
+         };
+         name = "Debug";
+      };
+      "OBJ_45" = {
+         isa = "XCBuildConfiguration";
+         buildSettings = {
+         };
+         name = "Release";
+      };
+      "OBJ_46" = {
+         isa = "PBXTargetDependency";
+         target = "AssetDownloader::AssetDownloaderTests";
+      };
+      "OBJ_48" = {
+         isa = "XCConfigurationList";
+         buildConfigurations = (
+            "OBJ_49",
+            "OBJ_50"
+         );
+         defaultConfigurationIsVisible = "0";
+         defaultConfigurationName = "Release";
+      };
+      "OBJ_49" = {
+         isa = "XCBuildConfiguration";
+         buildSettings = {
+            CLANG_ENABLE_MODULES = "YES";
+            EMBEDDED_CONTENT_CONTAINS_SWIFT = "YES";
+            FRAMEWORK_SEARCH_PATHS = (
+               "$(inherited)",
+               "$(PLATFORM_DIR)/Developer/Library/Frameworks"
+            );
+            HEADER_SEARCH_PATHS = (
+               "$(inherited)"
+            );
+            INFOPLIST_FILE = "AssetDownloader.xcodeproj/AssetDownloaderTests_Info.plist";
+            IPHONEOS_DEPLOYMENT_TARGET = "14.0";
+            LD_RUNPATH_SEARCH_PATHS = (
+               "$(inherited)",
+               "@loader_path/../Frameworks",
+               "@loader_path/Frameworks"
+            );
+            MACOSX_DEPLOYMENT_TARGET = "10.15";
+            OTHER_CFLAGS = (
+               "$(inherited)"
+            );
+            OTHER_LDFLAGS = (
+               "$(inherited)"
+            );
+            OTHER_SWIFT_FLAGS = (
+               "$(inherited)"
+            );
+            SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
+               "$(inherited)"
+            );
+            SWIFT_VERSION = "5.0";
+            TARGET_NAME = "AssetDownloaderTests";
+            TVOS_DEPLOYMENT_TARGET = "13.0";
+            WATCHOS_DEPLOYMENT_TARGET = "2.0";
+         };
+         name = "Debug";
+      };
+      "OBJ_5" = {
+         isa = "PBXGroup";
+         children = (
+            "OBJ_6",
+            "OBJ_7",
+            "OBJ_16",
+            "OBJ_20",
+            "OBJ_23",
+            "OBJ_24"
+         );
+         path = "";
+         sourceTree = "<group>";
+      };
+      "OBJ_50" = {
+         isa = "XCBuildConfiguration";
+         buildSettings = {
+            CLANG_ENABLE_MODULES = "YES";
+            EMBEDDED_CONTENT_CONTAINS_SWIFT = "YES";
+            FRAMEWORK_SEARCH_PATHS = (
+               "$(inherited)",
+               "$(PLATFORM_DIR)/Developer/Library/Frameworks"
+            );
+            HEADER_SEARCH_PATHS = (
+               "$(inherited)"
+            );
+            INFOPLIST_FILE = "AssetDownloader.xcodeproj/AssetDownloaderTests_Info.plist";
+            IPHONEOS_DEPLOYMENT_TARGET = "14.0";
+            LD_RUNPATH_SEARCH_PATHS = (
+               "$(inherited)",
+               "@loader_path/../Frameworks",
+               "@loader_path/Frameworks"
+            );
+            MACOSX_DEPLOYMENT_TARGET = "10.15";
+            OTHER_CFLAGS = (
+               "$(inherited)"
+            );
+            OTHER_LDFLAGS = (
+               "$(inherited)"
+            );
+            OTHER_SWIFT_FLAGS = (
+               "$(inherited)"
+            );
+            SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
+               "$(inherited)"
+            );
+            SWIFT_VERSION = "5.0";
+            TARGET_NAME = "AssetDownloaderTests";
+            TVOS_DEPLOYMENT_TARGET = "13.0";
+            WATCHOS_DEPLOYMENT_TARGET = "2.0";
+         };
+         name = "Release";
+      };
+      "OBJ_51" = {
+         isa = "PBXSourcesBuildPhase";
+         files = (
+            "OBJ_52",
+            "OBJ_53"
+         );
+      };
+      "OBJ_52" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_18";
+      };
+      "OBJ_53" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_19";
+      };
+      "OBJ_54" = {
+         isa = "PBXFrameworksBuildPhase";
+         files = (
+            "OBJ_55"
+         );
+      };
+      "OBJ_55" = {
+         isa = "PBXBuildFile";
+         fileRef = "AssetDownloader::AssetDownloader::Product";
+      };
+      "OBJ_56" = {
+         isa = "PBXTargetDependency";
+         target = "AssetDownloader::AssetDownloader";
+      };
+      "OBJ_6" = {
+         isa = "PBXFileReference";
+         explicitFileType = "sourcecode.swift";
+         path = "Package.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_7" = {
+         isa = "PBXGroup";
+         children = (
+            "OBJ_8"
+         );
+         name = "Sources";
+         path = "";
+         sourceTree = "SOURCE_ROOT";
+      };
+      "OBJ_8" = {
+         isa = "PBXGroup";
+         children = (
+            "OBJ_9",
+            "OBJ_12"
+         );
+         name = "AssetDownloader";
+         path = "Sources/AssetDownloader";
+         sourceTree = "SOURCE_ROOT";
+      };
+      "OBJ_9" = {
+         isa = "PBXGroup";
+         children = (
+            "OBJ_10",
+            "OBJ_11"
+         );
+         name = "Components";
+         path = "Components";
+         sourceTree = "<group>";
+      };
+   };
+   rootObject = "OBJ_1";
 }

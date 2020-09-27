@@ -16,7 +16,9 @@ public final class TaskQueue: NSObject {
     private let delegateQueue: OperationQueue
 
     private lazy var proxySessionDelegate: ProxySessionDelegate = ProxySessionDelegate(self)
+    #if !os(tvOS) && !os(macOS)
     private lazy var assetsSession: AVAssetDownloadURLSession = makeAssetsSession()
+    #endif
     private lazy var urlSession: URLSession = makeURLSession()
 
     public init(
@@ -34,6 +36,7 @@ public final class TaskQueue: NSObject {
 
 extension TaskQueue {
 
+    #if !os(tvOS) && !os(macOS)
     public func restoreAssetDownloadTasks(
         cancelNonRestorableTasks: Bool = true,
         _ taskProvider: @escaping (RestoredTask<AVURLAsset, AVAggregateAssetDownloadTask>) -> AVAssetDownloadDelegate?,
@@ -46,6 +49,7 @@ extension TaskQueue {
             taskSubscriptionCompletion
         )
     }
+    #endif
 
     public func restoreDownloadTasks(
         cancelNonRestorableTasks: Bool = true,
@@ -95,7 +99,7 @@ extension TaskQueue {
             debugPrint("\(String(describing: self)): \(counter) \(String(describing: Task.self)) tasks restored.")
         }
     }
-
+    #if !os(tvOS) && !os(macOS)
     private func makeAssetsSession(
     ) -> AVAssetDownloadURLSession {
         let configuration = URLSessionConfiguration.background(
@@ -109,6 +113,7 @@ extension TaskQueue {
             delegateQueue: delegateQueue
         )
     }
+    #endif
 
     private func makeURLSession(
     ) -> URLSession {
@@ -126,6 +131,7 @@ extension TaskQueue {
         _ downloadTask: AnyDownloadTask,
         delegate: URLSessionTaskDelegate? = nil
     ) -> DownloadTaskFactoryResult? {
+        #if !os(tvOS) && !os(macOS)
         if let url = downloadTask.url as? AVURLAsset {
             let _assetDownloadTask = DownloadTask<AVURLAsset>(
                 identifier: downloadTask.identifier,
@@ -154,8 +160,27 @@ extension TaskQueue {
             assertionFailure("Invalid download task request.")
             return nil
         }
+        #else
+        if let url = downloadTask.url as? URLRequest {
+            let _assetDownloadTask = DownloadTask<URLRequest>(
+                identifier: downloadTask.identifier,
+                url: url,
+                name: downloadTask.name,
+                artworkData: downloadTask.artworkData,
+                options: downloadTask.options
+            )
+            return makeDownloadTask(
+                _assetDownloadTask, delegate:
+                    delegate as? URLSessionDownloadDelegate
+            )
+        } else {
+            assertionFailure("Invalid download task request.")
+            return nil
+        }
+        #endif
     }
 
+    #if !os(tvOS) && !os(macOS)
     public func makeAssetDownloadTask(
         _ downloadTask: DownloadTask<AVURLAsset>,
         delegate: AVAssetDownloadDelegate? = nil
@@ -181,6 +206,7 @@ extension TaskQueue {
 
         return (_task, receipt)
     }
+    #endif
 
     public func makeDownloadTask(
         _ downloadTask: DownloadTask<URLRequest>,

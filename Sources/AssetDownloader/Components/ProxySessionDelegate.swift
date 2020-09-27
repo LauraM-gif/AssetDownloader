@@ -8,12 +8,22 @@
 import Foundation
 import AVFoundation
 
+#if os(tvOS) || os(macOS)
+public protocol ProxySessionDelegating: class, URLSessionTaskDelegate  {
+
+    func orphaned(
+        task: URLSessionTask
+    )
+}
+
+#else
 public protocol ProxySessionDelegating: class, AVAssetDownloadDelegate  {
 
     func orphaned(
         task: URLSessionTask
     )
 }
+#endif
 
 final class ProxySessionDelegate: NSObject {
 
@@ -49,12 +59,14 @@ extension ProxySessionDelegate {
         _delegate(for: task)
     }
 
+#if !os(tvOS) && !os(macOS)
     private func assetDelegate(
         for task: AVAggregateAssetDownloadTask
     ) -> AVAssetDownloadDelegate? {
         _delegate(for: task)
     }
-
+#endif
+    
     @discardableResult
     func subscribe(
         _ delegate: URLSessionTaskDelegate,
@@ -98,6 +110,7 @@ extension ProxySessionDelegate: URLSessionDownloadDelegate {
     }
 }
 
+#if !os(tvOS) && !os(macOS)
 extension ProxySessionDelegate: AVAssetDownloadDelegate {
 
     func urlSession(
@@ -130,6 +143,7 @@ extension ProxySessionDelegate: AVAssetDownloadDelegate {
         )
     }
 }
+#endif
 
 extension ProxySessionDelegate /* : URLSessionTaskDelegate */ {
 
@@ -146,6 +160,7 @@ extension ProxySessionDelegate /* : URLSessionTaskDelegate */ {
         )
     }
 
+    #if !os(macOS)
     func urlSessionDidFinishEvents(
         forBackgroundURLSession session: URLSession
     ) {
@@ -153,4 +168,5 @@ extension ProxySessionDelegate /* : URLSessionTaskDelegate */ {
             forBackgroundURLSession: session
         )
     }
+    #endif
 }
