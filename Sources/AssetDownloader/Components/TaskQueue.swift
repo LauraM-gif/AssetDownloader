@@ -38,7 +38,9 @@ extension TaskQueue {
             let restoredDownloadTasks = tasks
                 .compactMap { ($0 as? AVAggregateAssetDownloadTask)?.taskDescription != nil ? $0 as? AVAggregateAssetDownloadTask : nil  }
                 .map { RestoredTask<AVURLAsset, AVAggregateAssetDownloadTask>(name: $0.taskDescription!, url: $0.urlAsset, sessionTask: $0) }
-            for task in restoredDownloadTasks {
+
+            let setOfTasks = Set<RestoredTask<AVURLAsset, AVAggregateAssetDownloadTask>>(restoredDownloadTasks)
+            for task in setOfTasks {
                 guard let delegate = taskProvider(task) else {
                     if cancelNonRestorableTasks {
                         task.sessionTask.cancel()
