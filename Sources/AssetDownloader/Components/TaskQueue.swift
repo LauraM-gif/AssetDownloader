@@ -97,7 +97,7 @@ extension TaskQueue {
     private func makeAssetsSession(
     ) -> AVAssetDownloadURLSession {
         let configuration = URLSessionConfiguration.background(
-            withIdentifier: sessionName
+            withIdentifier: sessionName + ".assets"
         )
         configuration.sessionSendsLaunchEvents = true
 
@@ -119,9 +119,9 @@ extension TaskQueue {
 
         proxySessionDelegate.subscribe(self)
 
-        return AVAssetDownloadURLSession(
+        return URLSession(
             configuration: configuration,
-            assetDownloadDelegate: proxySessionDelegate,
+            delegate: self,
             delegateQueue: delegateQueue
         )
     }
