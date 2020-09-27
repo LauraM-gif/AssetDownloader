@@ -129,6 +129,40 @@ extension TaskQueue {
 
 extension TaskQueue {
 
+    public func makeTask(
+        _ downloadTask: AnyDownloadTask,
+        delegate: URLSessionTaskDelegate? = nil
+    ) -> DownloadTaskFactoryResult? {
+        if let url = downloadTask.url as? AVURLAsset {
+            let _assetDownloadTask = DownloadTask<AVURLAsset>(
+                identifier: downloadTask.identifier,
+                url: url,
+                name: downloadTask.name,
+                artworkData: downloadTask.artworkData,
+                options: downloadTask.options
+            )
+            return makeAssetDownloadTask(
+                _assetDownloadTask, delegate:
+                    delegate as? AVAssetDownloadDelegate
+            )
+        } else if let url = downloadTask.url as? URLRequest {
+            let _assetDownloadTask = DownloadTask<URLRequest>(
+                identifier: downloadTask.identifier,
+                url: url,
+                name: downloadTask.name,
+                artworkData: downloadTask.artworkData,
+                options: downloadTask.options
+            )
+            return makeDownloadTask(
+                _assetDownloadTask, delegate:
+                    delegate as? URLSessionDownloadDelegate
+            )
+        } else {
+            assertionFailure("Invalid download task request.")
+            return nil
+        }
+    }
+
     public func makeAssetDownloadTask(
         _ downloadTask: DownloadTask<AVURLAsset>,
         delegate: AVAssetDownloadDelegate? = nil
