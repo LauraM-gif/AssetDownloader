@@ -44,7 +44,6 @@ extension ProxySessionDelegate {
     ) -> SubscriptionReceipt {
         subscribers[identifier] = delegate
         return SubscriptionReceipt(
-            delegate: delegate,
             unsubscribeBlock: { [weak self] in self?.subscribers[identifier] = nil }
         )
     }

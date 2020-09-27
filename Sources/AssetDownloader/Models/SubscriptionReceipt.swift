@@ -9,6 +9,5 @@ import Foundation
 
 public struct SubscriptionReceipt {
 
-    weak var delegate: URLSessionDelegate?
-    let unsubscribeBlock: () -> Void
+    public let unsubscribeBlock: () -> Void
 }
