@@ -9,11 +9,11 @@ import Foundation
 import AVFoundation
 
 public struct RestoredTask<URLType: Hashable, Task: URLSessionTask>: Hashable, Equatable {
-    public let name: String
-    public let url: URLType
-    public let sessionTask: Task
+    let name: String
+    let url: URLType
+    let sessionTask: Task
 
-    public init(
+    init(
         name: String,
         url: URLType,
         sessionTask: Task
@@ -23,11 +23,11 @@ public struct RestoredTask<URLType: Hashable, Task: URLSessionTask>: Hashable, E
         self.sessionTask = sessionTask
     }
 
-    public init?(
+    init?(
         name: String,
         sessionTask: Task
     ) {
-        assertionFailure("Invalid URLType(\(URLType.self) and Task(\(Task.self) combination")
+        assertionFailure("Invalid URLType(\(URLType.self)) and Task(\(Task.self)) combination")
         return nil
     }
 
@@ -44,7 +44,7 @@ public struct RestoredTask<URLType: Hashable, Task: URLSessionTask>: Hashable, E
 #if !os(tvOS) && !os(macOS)
 extension RestoredTask where URLType == AVURLAsset, Task == AVAggregateAssetDownloadTask {
 
-    public init?(
+    init?(
         name: String,
         sessionTask: Task
     ) {
@@ -53,7 +53,7 @@ extension RestoredTask where URLType == AVURLAsset, Task == AVAggregateAssetDown
         self.sessionTask = sessionTask
     }
 
-    public static func ==(
+    static func ==(
         lhs: Self,
         rhs: Self
     ) -> Bool {
@@ -65,7 +65,7 @@ extension RestoredTask where URLType == AVURLAsset, Task == AVAggregateAssetDown
 
 extension RestoredTask where URLType == URLRequest, Task == URLSessionDownloadTask {
 
-    public init?(
+    init?(
         name: String,
         sessionTask: Task
     ) {
@@ -77,7 +77,7 @@ extension RestoredTask where URLType == URLRequest, Task == URLSessionDownloadTa
         self.sessionTask = sessionTask
     }
 
-    public static func ==(
+    static func ==(
         lhs: Self,
         rhs: Self
     ) -> Bool {
