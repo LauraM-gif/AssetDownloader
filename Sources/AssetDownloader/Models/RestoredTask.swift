@@ -9,9 +9,9 @@ import Foundation
 import AVFoundation
 
 public struct RestoredTask<URLType: Hashable, Task: URLSessionTask>: Hashable, Equatable {
-    let name: String
-    let url: URLType
-    let sessionTask: Task
+    public let name: String
+    public let url: URLType
+    public let sessionTask: Task
 
     init(
         name: String,
