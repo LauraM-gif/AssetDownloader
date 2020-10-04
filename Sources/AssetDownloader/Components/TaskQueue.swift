@@ -75,8 +75,9 @@ extension TaskQueue {
     ) {
         session.getAllTasks { [proxySessionDelegate] tasks in
             let restoredTasks = tasks
-                .compactMap { ($0 as? Task)?.taskDescription != nil ? $0 as? Task : nil  }
-                .compactMap { RestoredTask<URLType, Task>(name: $0.taskDescription!, sessionTask: $0) }
+                .compactMap { ($0 as? Task)?.taskDescription != nil ? $0 as? Task : nil }
+                .compactMap { (taskDescription: $0.taskDescription!, sessionTask: $0) }
+                .compactMap { RestoredTask<URLType, Task>(name: $0.taskDescription, sessionTask: $0.sessionTask) }
 
             let setOfTasks = Set<RestoredTask<URLType, Task>>(restoredTasks)
             var counter = 0

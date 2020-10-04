@@ -25,14 +25,10 @@ public struct RestoredTask<URLType: Hashable, Task: URLSessionTask>: Hashable, E
 
     public init?(
         name: String,
-        sessionTask: URLSessionTask
+        sessionTask: Task
     ) {
-        guard let myTask = sessionTask as? Task else {
-            assertionFailure("Invalid URLType and Task combination")
-            return nil
-        }
-
-        self.init(name: name, sessionTask: myTask)
+        assertionFailure("Invalid URLType and Task combination")
+        return nil
     }
 
     public func hash(
