@@ -52,7 +52,7 @@ public struct RestoredTask<URLType: Hashable, Task: URLSessionTask>: Hashable, E
 #if !os(tvOS) && !os(macOS)
 extension RestoredTask where URLType == AVURLAsset, Task == AVAggregateAssetDownloadTask {
 
-    public init(
+    public init?(
         name: String,
         sessionTask: Task
     ) {
