@@ -27,7 +27,7 @@ public struct RestoredTask<URLType: Hashable, Task: URLSessionTask>: Hashable, E
         name: String,
         sessionTask: Task
     ) {
-        assertionFailure("Invalid URLType and Task combination")
+        assertionFailure("Invalid URLType(\(URLType.self) and Task(\(Task.self) combination")
         return nil
     }
 
@@ -38,14 +38,6 @@ public struct RestoredTask<URLType: Hashable, Task: URLSessionTask>: Hashable, E
         if let assetURL = (url as? AVURLAsset)?.url {
             hasher.combine(assetURL)
         }
-    }
-
-    public static func ==(
-        lhs: Self,
-        rhs: Self
-    ) -> Bool {
-        return lhs.name == rhs.name
-            && (lhs.url as? AVURLAsset)?.url == (rhs.url as? AVURLAsset)?.url
     }
 }
 
@@ -59,6 +51,13 @@ extension RestoredTask where URLType == AVURLAsset, Task == AVAggregateAssetDown
         self.name = name
         self.url = sessionTask.urlAsset
         self.sessionTask = sessionTask
+    }
+
+    public static func ==(
+        lhs: Self,
+        rhs: Self
+    ) -> Bool {
+        return lhs.name == rhs.name && lhs.url == rhs.url
     }
 }
 #endif
@@ -76,5 +75,12 @@ extension RestoredTask where URLType == URLRequest, Task == URLSessionDownloadTa
         self.name = name
         self.url = request
         self.sessionTask = sessionTask
+    }
+
+    public static func ==(
+        lhs: Self,
+        rhs: Self
+    ) -> Bool {
+        return lhs.name == rhs.name && lhs.url == rhs.url
     }
 }
