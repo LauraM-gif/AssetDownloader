@@ -25,7 +25,7 @@ public struct RestoredTask<URLType: Hashable, Task: URLSessionTask>: Hashable, E
 
     init?(
         name: String,
-        sessionTask: Task
+        sessionTask: URLSessionTask
     ) {
         assertionFailure("Invalid URLType(\(URLType.self)) and Task(\(Task.self)) combination")
         return nil
