@@ -74,10 +74,10 @@ extension TaskQueue {
         _ taskSubscriptionCompletion: @escaping (URLSessionDelegate, SubscriptionReceipt) -> Void
     ) {
         session.getAllTasks { [proxySessionDelegate] tasks in
-            let restoredTasks = tasks
+            let restoredTasks: [RestoredTask<URLType, Task>] = tasks
                 .compactMap { ($0 as? Task)?.taskDescription != nil ? $0 as? Task : nil }
                 .compactMap { (taskDescription: $0.taskDescription!, sessionTask: $0) }
-                .compactMap { RestoredTask<URLType, Task>(name: $0.taskDescription, sessionTask: $0.sessionTask) }
+                .compactMap { RestoredTask(name: $0.taskDescription, sessionTask: $0.sessionTask) }
 
             let setOfTasks = Set<RestoredTask<URLType, Task>>(restoredTasks)
             var counter = 0
