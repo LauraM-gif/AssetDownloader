@@ -29,13 +29,30 @@ public struct RestoredTask<URLType: Hashable, Task: URLSessionTask>: Hashable, E
     ) {
         switch (String(describing: URLType.self), String(describing: Task.self)) {
             case (String(describing: AVURLAsset.self), String(describing: AVAggregateAssetDownloadTask.self)):
-                guard let assetTask = sessionTask as? AVAggregateAssetDownloadTask else {
+                guard
+                    let assetTask = sessionTask as? AVAggregateAssetDownloadTask,
+                    let _url = assetTask.urlAsset as? URLType,
+                    let _sessionTask = assetTask as? Task
+                else {
                     assertionFailure("Invalid URLType(\(URLType.self)) and Task(\(Task.self)) combination")
                     return nil
                 }
                 self.name = name
-                self.url = assetTask.urlAsset as! URLType
-                self.sessionTask = assetTask as! Task
+                self.url = _url
+                self.sessionTask = _sessionTask
+            case (String(describing: URLRequest.self), String(describing: URLSessionDownloadTask.self)):
+                guard
+                    let task = sessionTask as? URLSessionDownloadTask,
+                    let request = task.currentRequest,
+                    let _url = request as? URLType,
+                    let _sessionTask = task as? Task
+                else {
+                    assertionFailure("Invalid URLType(\(URLType.self)) and Task(\(Task.self)) combination")
+                    return nil
+                }
+                self.name = name
+                self.url = _url
+                self.sessionTask = _sessionTask
             default:
                 assertionFailure("Invalid URLType(\(URLType.self)) and Task(\(Task.self)) combination")
                 return nil
