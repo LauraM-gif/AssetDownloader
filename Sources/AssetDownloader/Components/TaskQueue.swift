@@ -13,6 +13,7 @@ public final class TaskQueue: NSObject {
     public typealias DownloadTaskFactoryResult = (task: URLSessionTask, subscriptionReceipt: SubscriptionReceipt?)
 
     private let sessionName: String
+    private let dispatchQueue: DispatchQueue
     private let delegateQueue: OperationQueue
 
     private lazy var proxySessionDelegate: ProxySessionDelegate = ProxySessionDelegate(self)
@@ -23,9 +24,11 @@ public final class TaskQueue: NSObject {
 
     public init(
         _ sessionName: String,
+        dispatchQueue: DispatchQueue = DispatchQueue.global(qos: .background),
         delegateQueue: OperationQueue = .main
     ) {
         self.sessionName = sessionName
+        self.dispatchQueue = dispatchQueue
         self.delegateQueue = delegateQueue
 
         super.init()
@@ -74,30 +77,32 @@ extension TaskQueue {
         _ taskSubscriptionCompletion: @escaping (URLSessionDelegate, SubscriptionReceipt) -> Void
     ) {
         session.getAllTasks { [proxySessionDelegate] tasks in
-            let restoredTasks: [RestoredTask<URLType, Task>] = tasks
-                .compactMap { ($0 as? Task)?.taskDescription != nil ? $0 as? Task : nil }
-                .compactMap { (taskDescription: $0.taskDescription!, sessionTask: $0) }
-                .compactMap { RestoredTask(name: $0.taskDescription, sessionTask: $0.sessionTask) }
+            self.dispatchQueue.async {
+                let restoredTasks: [RestoredTask<URLType, Task>] = tasks
+                    .compactMap { ($0 as? Task)?.taskDescription != nil ? $0 as? Task : nil }
+                    .compactMap { (taskDescription: $0.taskDescription!, sessionTask: $0) }
+                    .compactMap { RestoredTask(name: $0.taskDescription, sessionTask: $0.sessionTask) }
 
-            let setOfTasks = Set<RestoredTask<URLType, Task>>(restoredTasks)
-            var counter = 0
+                let setOfTasks = Set<RestoredTask<URLType, Task>>(restoredTasks)
+                var counter = 0
 
-            debugPrint("\(String(describing: self)): Will try to restore \(setOfTasks.count) \(String(describing: Task.self)) tasks.")
+                debugPrint("\(String(describing: self)): Will try to restore \(setOfTasks.count) \(String(describing: Task.self)) tasks.")
 
-            for task in setOfTasks {
-                guard let delegate = taskProvider(task) else {
-                    if cancelNonRestorableTasks {
-                        task.sessionTask.cancel()
+                for task in setOfTasks {
+                    guard let delegate = taskProvider(task) else {
+                        if cancelNonRestorableTasks {
+                            task.sessionTask.cancel()
+                        }
+                        continue
                     }
-                    continue
+
+                    let receipt = proxySessionDelegate.subscribe(delegate, identifier: task)
+                    taskSubscriptionCompletion(delegate, receipt)
+                    counter += 1
                 }
 
-                let receipt = proxySessionDelegate.subscribe(delegate, identifier: task)
-                taskSubscriptionCompletion(delegate, receipt)
-                counter += 1
+                debugPrint("\(String(describing: self)): \(counter) \(String(describing: Task.self)) tasks restored.")
             }
-
-            debugPrint("\(String(describing: self)): \(counter) \(String(describing: Task.self)) tasks restored.")
         }
     }
     #if !os(tvOS) && !os(macOS)
