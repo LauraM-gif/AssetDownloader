@@ -59,15 +59,6 @@ public struct RestoredTask<URLType: Hashable, Task: URLSessionTask>: Hashable, E
         }
 
     }
-
-    public func hash(
-        into hasher: inout Hasher
-    ) {
-        hasher.combine(name)
-        if let assetURL = (url as? AVURLAsset)?.url {
-            hasher.combine(assetURL)
-        }
-    }
 }
 
 #if !os(tvOS) && !os(macOS)
@@ -87,6 +78,13 @@ extension RestoredTask where URLType == AVURLAsset, Task == AVAggregateAssetDown
         rhs: Self
     ) -> Bool {
         return lhs.name == rhs.name && lhs.url == rhs.url
+    }
+
+    public func hash(
+        into hasher: inout Hasher
+    ) {
+        hasher.combine(name)
+        hasher.combine(url.url)
     }
 }
 #endif
@@ -111,5 +109,12 @@ extension RestoredTask where URLType == URLRequest, Task == URLSessionDownloadTa
         rhs: Self
     ) -> Bool {
         return lhs.name == rhs.name && lhs.url == rhs.url
+    }
+
+    public func hash(
+        into hasher: inout Hasher
+    ) {
+        hasher.combine(name)
+        hasher.combine(url.url)
     }
 }
