@@ -28,6 +28,7 @@ public struct RestoredTask<URLType: Hashable, Task: URLSessionTask>: Hashable, E
         sessionTask: URLSessionTask
     ) {
         switch (String(describing: URLType.self), String(describing: Task.self)) {
+            #if !os(tvOS) && !os(macOS)
             case (String(describing: AVURLAsset.self), String(describing: AVAggregateAssetDownloadTask.self)):
                 guard
                     let assetTask = sessionTask as? AVAggregateAssetDownloadTask,
@@ -40,6 +41,7 @@ public struct RestoredTask<URLType: Hashable, Task: URLSessionTask>: Hashable, E
                 self.name = name
                 self.url = _url
                 self.sessionTask = _sessionTask
+            #endif
             case (String(describing: URLRequest.self), String(describing: URLSessionDownloadTask.self)):
                 guard
                     let task = sessionTask as? URLSessionDownloadTask,
