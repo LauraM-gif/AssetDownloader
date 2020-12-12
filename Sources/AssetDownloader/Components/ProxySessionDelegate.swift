@@ -126,7 +126,7 @@ extension ProxySessionDelegate: AVAssetDownloadDelegate {
             aggregateAssetDownloadTask: aggregateAssetDownloadTask,
             didLoad: timeRange,
             totalTimeRangesLoaded: loadedTimeRanges,
-            timeRangeExpectedToLoad: timeRange,
+            timeRangeExpectedToLoad: timeRangeExpectedToLoad,
             for: mediaSelection
         )
     }
