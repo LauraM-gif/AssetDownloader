@@ -1,0 +1,3 @@
+This picture message or video message was sent using Multimedia Messaging Service. 
+
+To play video messages sent to email, Apple QuickTime 6.5 or higher is required. Visit www.apple.com/quicktime/download to download the free player or upgrade your existing QuickTime Player. Note: During the download process when asked to choose an installation type (Minimum, Recommended or Custom), select Minimum for faster download.
