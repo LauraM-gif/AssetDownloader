@@ -1,0 +1,8 @@
+.DS_Store
+<<<<<<< HEAD
+UserInterfaceState.xcuserstate
+__DerivedData
+xcuserdata
+.build
+=======
+>>>>>>> a2d5d38... Initial commit including only avasset abstractions
